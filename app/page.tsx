@@ -102,7 +102,7 @@ export default async function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-4xl space-y-8"
+            className="max-w-5xl space-y-8 text-center sm:text-left mx-auto sm:mx-0"
           >
             <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
@@ -113,10 +113,10 @@ export default async function Home() {
               {heroBadge}
             </motion.span>
 
-            <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[1.1] font-heading drop-shadow-2xl">
-              <span className="block italic opacity-90 break-words">{heroTitleLines[0] || "ENSEMBLE,"}</span>
-              <span className="block break-words">{heroTitleLines[1] || "CONSTRUISONS"}</span>
-              <span className="text-[var(--color-primary)] drop-shadow-[0_0_15px_rgba(255,0,0,0.3)] break-words">{heroTitleLines[2] || "L'AVENIR"}</span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[1.1] font-heading drop-shadow-2xl">
+              <span className="block italic opacity-90">{heroTitleLines[0] || "ENSEMBLE,"}</span>
+              <span className="block whitespace-nowrap">{heroTitleLines[1] || "CONSTRUISONS"}</span>
+              <span className="text-[var(--color-primary)] drop-shadow-[0_0_15px_rgba(255,0,0,0.3)] whitespace-nowrap">{heroTitleLines[2] || "L'AVENIR"}</span>
             </h1>
 
             <motion.p
