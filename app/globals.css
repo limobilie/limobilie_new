@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #ff0000;
+  /* Vivid red from user image */
+  --color-primary-hover: #cc0000;
+  --color-text: #0f172a;
+  --color-text-light: #475569;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f8fafc;
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-outfit);
+  --font-mono: var(--font-inter);
+}
+
+/* Base styles enforcing the White & Red Elegance */
+@layer base {
+  body {
+    @apply bg-[var(--color-bg)] text-[var(--color-text)] font-sans antialiased;
+  }
+}
