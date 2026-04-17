@@ -1,12 +1,42 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Loader2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      const isLocalAuth = localStorage.getItem('limobilie_admin_auth') === 'true';
+
+      if (session || isLocalAuth) {
+        setIsAuthenticated(true);
+      } else {
+        router.push("/admin/login");
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center bg-[#FAFAFA]">
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <Loader2 size={32} className="animate-spin text-[var(--color-primary)]" />
+          <p className="text-slate-500 font-medium">Vérification de l&apos;accès sécurisé...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full w-full bg-[#FAFAFA] overflow-hidden">

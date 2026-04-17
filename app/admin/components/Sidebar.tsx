@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, FileText, Image as ImageIcon, Settings, LogOut, Home, Briefcase, ShoppingBag, Users, Zap, X } from "lucide-react";
-import Image from "next/image";
+
+import { supabase } from "@/lib/supabase";
 
 export default function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
@@ -54,7 +55,9 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
     }
   ];
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    localStorage.removeItem('limobilie_admin_auth');
+    await supabase.auth.signOut();
     window.location.href = "/admin/login";
   };
 

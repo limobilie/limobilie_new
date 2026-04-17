@@ -33,10 +33,11 @@ export default function AdminLogin() {
         // Redirection vers le dashboard
         router.push("/admin");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       // Hardcoded fallback for now if Auth not yet set up on Supabase side
       if (email === "limobili225@gmail.com" && password === "PRUNI.23") {
+         localStorage.setItem('limobilie_admin_auth', 'true');
          router.push("/admin");
          return;
       }
@@ -57,7 +58,7 @@ export default function AdminLogin() {
             <Image src="/images/logo2.png" alt="Logo Limobilié" fill className="object-contain" />
           </div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Accès Sécurisé</h1>
-          <p className="text-slate-500 mt-2 font-medium">Espace réservé à l'administration</p>
+          <p className="text-slate-500 mt-2 font-medium">Espace réservé à l&apos;administration</p>
         </div>
 
         {error && (
