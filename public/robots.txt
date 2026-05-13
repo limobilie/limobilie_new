@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://www.limobilie.ci/sitemap.xml
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/

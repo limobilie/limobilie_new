@@ -44,7 +44,17 @@ export default function AcheterClient({ content, dbProperties }: { content: Reco
     city: "",
     offerType: "vente",
     budgetMax: "",
-    surfaceMin: ""
+    surfaceMin: "",
+    searchText: "",
+    reference: "",
+    piecesMin: "",
+    chambresMin: "",
+    salleBainMin: "",
+    balcon: false,
+    ascenseur: false,
+    stationnement: false,
+    pmr: false,
+    piscine: false,
   });
 
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
@@ -68,12 +78,30 @@ export default function AcheterClient({ content, dbProperties }: { content: Reco
       const matchCity = activeFilters.city === "" ||
         p.city.toLowerCase().includes(activeFilters.city.toLowerCase()) ||
         p.location.toLowerCase().includes(activeFilters.city.toLowerCase());
-
-      const matchBudget = activeFilters.budgetMax === "" || p.priceValue <= parseInt(activeFilters.budgetMax);
+      const matchBudget = activeFilters.budgetMax === "" ||
+        p.priceValue <= parseInt(activeFilters.budgetMax.replace(/[^0-9]/g, ""));
       const matchSurface = activeFilters.surfaceMin === "" ||
-        (parseInt(p.surface.replace(/[^0-9]/g, '')) || 0) >= parseInt(activeFilters.surfaceMin);
+        (parseInt(p.surface.replace(/[^0-9]/g, "")) || 0) >= parseInt(activeFilters.surfaceMin);
+      const matchSearchText = activeFilters.searchText === "" ||
+        p.title.toLowerCase().includes(activeFilters.searchText.toLowerCase()) ||
+        p.description.toLowerCase().includes(activeFilters.searchText.toLowerCase());
+      const matchReference = activeFilters.reference === "" ||
+        p.id.toLowerCase().includes(activeFilters.reference.toLowerCase());
+      const matchChambres = activeFilters.chambresMin === "" ||
+        (p.specs.chambres ?? 0) >= parseInt(activeFilters.chambresMin);
+      const matchPieces = activeFilters.piecesMin === "" ||
+        parseInt((p.specs.pieces ?? "0").replace(/[^0-9]/g, "")) >= parseInt(activeFilters.piecesMin);
+      const matchSalleBain = activeFilters.salleBainMin === "" ||
+        (p.specs.salleBain ?? 0) >= parseInt(activeFilters.salleBainMin);
+      const matchBalcon = !activeFilters.balcon || p.specs.balcon === true;
+      const matchAscenseur = !activeFilters.ascenseur || p.specs.ascenseur === true;
+      const matchStationnement = !activeFilters.stationnement || p.specs.stationnement === true;
+      const matchPmr = !activeFilters.pmr || p.specs.pmr === true;
+      const matchPiscine = !activeFilters.piscine || p.specs.piscine === true;
 
-      return matchOfferType && matchType && matchCity && matchBudget && matchSurface;
+      return matchOfferType && matchType && matchCity && matchBudget && matchSurface &&
+        matchSearchText && matchReference && matchChambres && matchPieces &&
+        matchSalleBain && matchBalcon && matchAscenseur && matchStationnement && matchPmr && matchPiscine;
     });
   }, [activeFilters]);
 
@@ -155,7 +183,7 @@ export default function AcheterClient({ content, dbProperties }: { content: Reco
               <p className="text-slate-500 font-medium">Réessayez avec d&apos;autres critères ou une autre localisation.</p>
             </div>
             <button
-              onClick={() => setActiveFilters({ type: "", city: "", offerType: "vente", budgetMax: "", surfaceMin: "" })}
+              onClick={() => setActiveFilters({ type: "", city: "", offerType: "vente", budgetMax: "", surfaceMin: "", searchText: "", reference: "", piecesMin: "", chambresMin: "", salleBainMin: "", balcon: false, ascenseur: false, stationnement: false, pmr: false, piscine: false })}
               className="text-[var(--color-primary)] font-black uppercase tracking-widest text-xs hover:underline"
             >
               Réinitialiser les filtres

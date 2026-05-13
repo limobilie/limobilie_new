@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏠 Limobilié
 
-## Getting Started
+**Limobilié** est une agence immobilière basée à Abidjan, en Côte d'Ivoire. Ce site est sa vitrine digitale officielle, conçue pour permettre aux clients de découvrir et rechercher des biens immobiliers en ligne, et à l'équipe de gérer l'ensemble du contenu sans aucune compétence technique.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎯 À quoi sert ce site ?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site remplit trois missions principales :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Pour les clients** — ils peuvent parcourir le catalogue de biens disponibles (terrains, villas, maisons, appartements), filtrer par type, localisation, budget, surface et équipements, puis contacter directement l'agence via WhatsApp en un clic.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Pour l'agence** — un espace d'administration privé permet de publier de nouveaux biens avec photos, modifier les textes de toutes les pages du site, et mettre à jour les coordonnées de contact, le tout sans toucher au code.
 
-## Learn More
+**Pour la confiance** — le site met en avant l'engagement social de Limobilié à travers son programme *Limobilié Impact*, un partenariat avec la Tédie Ange Foundation (TAF) qui consacre une partie de chaque vente au soutien des enfants atteints de cancer.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏡 Ce que propose Limobilié
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Vente de terrains** — lots sécurisés avec ACD (Arrêté de Concession Définitive) à Abidjan, Azaguié, Yamoussoukro et environs
+- **Vente de villas & appartements** — biens résidentiels haut de gamme
+- **Location** — maisons et appartements meublés ou vides
+- **Gestion immobilière** — prise en charge complète des biens pour les propriétaires
+- **Commercialisation** — mise en vente et suivi des biens confiés
+- **Travaux & aménagement** — rénovation et décoration intérieure
+- **Tontine immobilière** — épargne collective pour accéder à la propriété
+- **Rapports immobiliers** — analyses et études du marché ivoirien
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📍 Localisation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Bingerville, Paris-Village — Abidjan, Côte d'Ivoire  
+📞 +225 05 45 93 56 73  
+📧 limobili225@gmail.com
