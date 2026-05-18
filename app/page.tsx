@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Shield, Heart, CheckCircle, Phone, MapPin, BadgeCheck } from "lucide-react";
 import * as motion from "framer-motion/client"
-import PropertyCard from "@/components/ui/PropertyCard";
 import { supabase } from "@/lib/supabase";
+import { Property } from "@/data/properties";
+import FeaturedPropertiesClient from "@/components/real-estate/FeaturedPropertiesClient";
 
 export const revalidate = 0;
 
@@ -17,11 +18,28 @@ export default async function Home() {
   const contentMap = contentRes.data?.reduce((acc, curr) => ({ ...acc, [curr.key]: curr.value }), {} as Record<string, string>) || {};
   const dbProperties = propertiesRes.data || [];
 
-  const mappedDbProperties = dbProperties.map(p => ({
-    title: p.title, price: p.price, area: p.surface,
-    image: p.image_url, location: p.city,
-    type: p.type === 'terrain' ? 'Terrain' : 'Villa',
-    description: p.location
+  const mappedDbProperties: Property[] = dbProperties.map(p => ({
+    id: p.id,
+    title: p.title,
+    price: p.price,
+    priceValue: Number(p.price_value) || 0,
+    description: p.description || p.location || "Aucune description fournie.",
+    surface: p.surface,
+    location: p.location,
+    city: p.city,
+    type: p.type as any,
+    offerType: p.offer_type as any,
+    image: p.image_url,
+    gallery: [p.image_url],
+    specs: {
+       chambres: 0,
+       salleBain: 0,
+       balcon: false,
+       ascenseur: false,
+       stationnement: false,
+       pmr: false,
+       piscine: false
+    }
   }));
 
   const heroTitleText = contentMap.hero_title || "ENSEMBLE,\\nCONSTRUISONS\\nL'AVENIR";
@@ -33,10 +51,52 @@ export default async function Home() {
   const trustTitle = contentMap.trust_title || "Votre Confiance, Notre Priorité";
   const trustSubtitle = contentMap.trust_subtitle || "Nous sélectionnons rigoureusement des lots sécurisés avec documents administratifs traçables.";
 
-  const defaultFeaturedProperties = [
-    { title: "Terrain Azaguié", price: "3.000.000 FCFA", area: "500m²", image: "/images/terrain11.png", location: "Azaguié", type: "Terrain", description: "LOTS APPROUVÉS" },
-    { title: "Azaguié Ahoua", price: "3.500.000 FCFA", area: "500m²", image: "/images/azague.png", location: "Azaguié Ahoua", type: "Terrain", description: "Bordure de voie - 43 LOTS APPROUVÉS" },
-    { title: "Terrain Yamoussoukro", price: "Contactez-nous", area: "Sur mesure", image: "/images/terrain222.png", location: "Yamoussoukro", type: "Lotissement", description: "Lots viabilisés au cœur de la capitale" }
+  const defaultFeaturedProperties: Property[] = [
+    { 
+      id: "default-azaguie",
+      title: "Terrain Azaguié", 
+      price: "3.000.000 FCFA", 
+      priceValue: 3000000,
+      description: "LOTS APPROUVÉS - Magnifique terrain de 500 m² situé à Azaguié, idéal pour un projet de construction résidentielle ou un investissement foncier. Zone calme et accessible, offrant un excellent potentiel de valorisation à moyen et long terme.",
+      surface: "500 m²", 
+      location: "Azaguié", 
+      city: "Azaguié", 
+      type: "terrain", 
+      offerType: "vente",
+      image: "/images/terrain11.png",
+      gallery: ["/images/terrain11.png"],
+      specs: { chambres: 0, salleBain: 0, balcon: false, ascenseur: false, stationnement: false, pmr: false, piscine: false }
+    },
+    { 
+      id: "default-ahoua",
+      title: "Azaguié Ahoua", 
+      price: "3.500.000 FCFA", 
+      priceValue: 3500000,
+      description: "Bordure de voie - 43 LOTS APPROUVÉS. Zone d'avenir à fort potentiel avec accès direct aux grands axes routiers d'Adzopé.",
+      surface: "500 m²", 
+      location: "Azaguié Ahoua", 
+      city: "Azaguié", 
+      type: "terrain", 
+      offerType: "vente",
+      image: "/images/azague.png",
+      gallery: ["/images/azague.png"],
+      specs: { chambres: 0, salleBain: 0, balcon: false, ascenseur: false, stationnement: false, pmr: false, piscine: false }
+    },
+    { 
+      id: "default-yamoussoukro",
+      title: "Terrain Yamoussoukro", 
+      price: "Contactez-nous", 
+      priceValue: 0,
+      description: "Lots viabilisés au cœur de la capitale politique. Position stratégique idéale pour les investisseurs et promoteurs cherchant de superbes parcelles approuvées.",
+      surface: "Sur mesure", 
+      location: "Yamoussoukro", 
+      city: "Yamoussoukro", 
+      type: "terrain", 
+      offerType: "vente",
+      image: "/images/terrain222.png",
+      gallery: ["/images/terrain222.png"],
+      specs: { chambres: 0, salleBain: 0, balcon: false, ascenseur: false, stationnement: false, pmr: false, piscine: false }
+    }
   ];
 
   const finalFeaturedProperties = [...mappedDbProperties, ...defaultFeaturedProperties].slice(0, 3);
@@ -146,9 +206,7 @@ export default async function Home() {
               Voir tout <ArrowRight size={14} className="ml-1" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {finalFeaturedProperties.map((prop, i) => <PropertyCard key={i} {...prop} />)}
-          </div>
+          <FeaturedPropertiesClient properties={finalFeaturedProperties} />
         </div>
       </section>
 
