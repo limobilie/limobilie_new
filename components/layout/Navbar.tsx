@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { X, ChevronDown, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -47,9 +48,15 @@ const navigation = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+
+  // Fermer le menu mobile lors du changement de route
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -230,7 +237,7 @@ export default function Navbar() {
                 <div className="space-y-10">
                   <Link
                     href="/"
-                    onClick={toggleMenu}
+                    onClick={() => setTimeout(() => setIsMenuOpen(false), 100)}
                     className="block text-3xl font-black text-slate-900"
                   >
                     Accueil
@@ -254,7 +261,7 @@ export default function Navbar() {
                               <Link
                                 key={child.name}
                                 href={child.href}
-                                onClick={toggleMenu}
+                                onClick={() => setTimeout(() => setIsMenuOpen(false), 100)}
                                 className="text-xl font-bold text-slate-900 flex items-center group"
                               >
                                 {child.name}
@@ -267,7 +274,7 @@ export default function Navbar() {
                         item.name !== "Accueil" && (
                           <Link
                             href={item.href}
-                            onClick={toggleMenu}
+                            onClick={() => setTimeout(() => setIsMenuOpen(false), 100)}
                             className="block text-3xl font-black text-slate-900"
                           >
                             {item.name}
@@ -281,7 +288,7 @@ export default function Navbar() {
                 <div className="mt-16 pb-12">
                   <Link
                     href="/contact"
-                    onClick={toggleMenu}
+                    onClick={() => setTimeout(() => setIsMenuOpen(false), 100)}
                     className="flex items-center justify-center gap-3 bg-[var(--color-primary)] text-white px-6 py-6 rounded-[24px] text-xl font-black shadow-xl shadow-red-500/20"
                   >
                     Nous Contacter

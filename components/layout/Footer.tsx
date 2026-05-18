@@ -70,8 +70,8 @@ export default async function Footer() {
 
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-8">
-            <Link href="/" className="relative block h-[70px] w-[260px]">
-              <Image src="/images/logo2.png" alt="Limobilié Logo" fill sizes="340px" className="object-contain object-left scale-[3] transform origin-left" />
+            <Link href="/" className="relative block h-[60px] w-[180px] hover:opacity-90 transition-opacity">
+              <Image src="/images/logo2.png" alt="Limobilié Logo" fill sizes="180px" className="object-contain object-left" />
             </Link>
             <p className="text-slate-500 text-lg leading-relaxed max-w-sm font-medium">
               L&apos;excellence immobilière en Côte d&apos;Ivoire. Nous transformons vos projets en réalités durables avec passion et rigueur.
