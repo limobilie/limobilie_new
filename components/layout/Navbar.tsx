@@ -93,8 +93,8 @@ export default function Navbar() {
             : "bg-transparent border-b border-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20 md:h-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-visible">
+          <div className="flex justify-between items-center h-20 md:h-28 overflow-visible">
             {/* Logo Section - Professional Sizing */}
             <div className="flex items-center">
               <Link href="/" className="relative block h-[50px] w-[140px] md:h-[80px] md:w-[240px] transition-transform active:scale-95">
@@ -111,7 +111,10 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <nav className="hidden xl:flex items-center space-x-1">
-              {navigation.map((item) => (
+              {navigation.map((item, index) => {
+                // Les 2 derniers items avec dropdown s'ouvrent vers la gauche pour ne pas déborder
+                const isRightAligned = index >= navigation.length - 2;
+                return (
                 <div
                   key={item.name}
                   className="relative group"
@@ -160,7 +163,9 @@ export default function Navbar() {
                   {/* Dropdown Menu */}
                   {item.children && (
                     <div
-                      className={`absolute top-full left-0 w-72 pt-4 transition-all duration-300 transform origin-top ${
+                      className={`absolute top-full w-72 pt-4 transition-all duration-300 transform origin-top ${
+                        isRightAligned ? "right-0" : "left-0"
+                      } ${
                         activeDropdown === item.name
                           ? "opacity-100 visible scale-y-100 translate-y-0"
                           : "opacity-0 invisible scale-y-95 -translate-y-4 pointer-events-none"
@@ -180,7 +185,8 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
-              ))}
+                );
+              })}
 
               <Link
                 href="/contact"
