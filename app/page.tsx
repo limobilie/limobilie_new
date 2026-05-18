@@ -115,8 +115,8 @@ export default async function Home() {
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[1.1] font-heading drop-shadow-2xl">
               <span className="block italic opacity-90">{heroTitleLines[0] || "ENSEMBLE,"}</span>
-              <span className="block whitespace-nowrap">{heroTitleLines[1] || "CONSTRUISONS"}</span>
-              <span className="text-[var(--color-primary)] drop-shadow-[0_0_15px_rgba(255,0,0,0.3)] whitespace-nowrap">{heroTitleLines[2] || "L'AVENIR"}</span>
+              <span className="block sm:whitespace-nowrap">{heroTitleLines[1] || "CONSTRUISONS"}</span>
+              <span className="text-[var(--color-primary)] drop-shadow-[0_0_15px_rgba(255,0,0,0.3)] sm:whitespace-nowrap">{heroTitleLines[2] || "L'AVENIR"}</span>
             </h1>
 
             <motion.p
@@ -134,11 +134,11 @@ export default async function Home() {
               transition={{ delay: 0.8, duration: 0.6 }}
               className="flex flex-col sm:flex-row gap-6 pt-8 items-center sm:items-start"
             >
-              <Link href="/acheter" className="group bg-[var(--color-primary)] text-white px-12 py-5 rounded-full text-xl font-bold hover:bg-red-700 transition-all shadow-2xl hover:shadow-red-600/40 active:scale-95 flex items-center gap-3">
+              <Link href="/acheter" className="group bg-[var(--color-primary)] text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:bg-red-700 transition-all shadow-2xl hover:shadow-red-600/40 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
                 Explorer nos biens
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href="tel:+2250545935673" className="flex items-center space-x-4 text-slate-900 bg-white px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-50 transition-all shadow-xl group">
+              <a href="tel:+2250545935673" className="flex items-center justify-center space-x-4 text-slate-900 bg-white px-6 sm:px-10 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold hover:bg-slate-50 transition-all shadow-xl group w-full sm:w-auto">
                 <Phone size={24} className="text-[var(--color-primary)] group-hover:rotate-12 transition-transform" />
                 <span>+225 05 45 93 56 73</span>
               </a>

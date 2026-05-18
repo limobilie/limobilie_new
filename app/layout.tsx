@@ -125,7 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="fr" className={`${inter.variable} ${outfit.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${outfit.variable} overflow-x-hidden w-full`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
