@@ -93,110 +93,76 @@ export default function Navbar() {
             : "bg-transparent border-b border-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-visible">
-          <div className="flex justify-between items-center h-20 md:h-28 overflow-visible">
-            {/* Logo Section - Professional Sizing */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20 md:h-28">
+            {/* Logo */}
             <div className="flex items-center">
               <Link href="/" className="relative block h-[50px] w-[140px] md:h-[80px] md:w-[240px] transition-transform active:scale-95">
-                <Image
-                  src="/images/logo2.png"
-                  alt="Limobilié Logo"
-                  fill
-                  sizes="(max-width: 768px) 140px, 240px"
-                  className="object-contain object-left"
-                  priority
-                />
+                <Image src="/images/logo2.png" alt="Limobilié Logo" fill sizes="(max-width: 768px) 140px, 240px" className="object-contain object-left" priority />
               </Link>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden xl:flex items-center space-x-1">
               {navigation.map((item, index) => {
-                // Les 2 derniers items avec dropdown s'ouvrent vers la gauche pour ne pas déborder
                 const isRightAligned = index >= navigation.length - 2;
                 return (
-                <div
-                  key={item.name}
-                  className="relative group"
-                  onMouseEnter={() => item.children && setActiveDropdown(item.name)}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  {item.children ? (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (activeDropdown === item.name) {
-                          setActiveDropdown(null);
-                        } else {
-                          setActiveDropdown(item.name);
-                        }
-                      }}
-                      className={`flex items-center space-x-1.5 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                        activeDropdown === item.name
-                          ? "text-[var(--color-primary)] bg-red-50/50"
-                          : scrolled 
-                            ? "text-slate-700 hover:text-[var(--color-primary)] hover:bg-slate-50/50"
-                            : "text-slate-800 hover:text-[var(--color-primary)] bg-white/50 backdrop-blur-sm lg:bg-transparent"
-                      }`}
-                    >
-                      <span>{item.name}</span>
-                      <ChevronDown
-                        size={14}
-                        className={`transition-transform duration-300 ${
-                          activeDropdown === item.name ? "rotate-180" : ""
+                  <div
+                    key={item.name}
+                    className="relative group"
+                    onMouseEnter={() => item.children && setActiveDropdown(item.name)}
+                    onMouseLeave={() => setActiveDropdown(null)}
+                  >
+                    {item.children ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveDropdown(activeDropdown === item.name ? null : item.name);
+                        }}
+                        className={`flex items-center space-x-1.5 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                          activeDropdown === item.name
+                            ? "text-[var(--color-primary)] bg-red-50/50"
+                            : scrolled
+                              ? "text-slate-700 hover:text-[var(--color-primary)] hover:bg-slate-50/50"
+                              : "text-slate-800 hover:text-[var(--color-primary)] bg-white/50 backdrop-blur-sm lg:bg-transparent"
                         }`}
-                      />
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                        scrolled 
-                          ? "text-slate-700 hover:text-[var(--color-primary)] hover:bg-slate-50/50"
-                          : "text-slate-800 hover:text-[var(--color-primary)] bg-white/50 backdrop-blur-sm lg:bg-transparent"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
+                      >
+                        <span>{item.name}</span>
+                        <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === item.name ? "rotate-180" : ""}`} />
+                      </button>
+                    ) : (
+                      <Link href={item.href} className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${scrolled ? "text-slate-700 hover:text-[var(--color-primary)] hover:bg-slate-50/50" : "text-slate-800 hover:text-[var(--color-primary)] bg-white/50 backdrop-blur-sm lg:bg-transparent"}`}>
+                        {item.name}
+                      </Link>
+                    )}
 
-                  {/* Dropdown Menu */}
-                  {item.children && (
-                    <div
-                      className={`absolute top-full w-72 pt-4 transition-all duration-300 transform origin-top ${
-                        isRightAligned ? "right-0" : "left-0"
-                      } ${
-                        activeDropdown === item.name
-                          ? "opacity-100 visible scale-y-100 translate-y-0"
-                          : "opacity-0 invisible scale-y-95 -translate-y-4 pointer-events-none"
-                      }`}
-                    >
-                      <div className="bg-white/95 backdrop-blur-xl rounded-[24px] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100/50 overflow-hidden p-3">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.name}
-                            href={child.href}
-                            className="block px-5 py-3.5 text-sm font-medium text-slate-600 hover:text-[var(--color-primary)] hover:bg-slate-50/80 rounded-[16px] transition-all"
-                          >
-                            {child.name}
-                          </Link>
-                        ))}
+                    {/* Dropdown — position absolute DANS le header fixe, ne crée aucun scroll */}
+                    {item.children && activeDropdown === item.name && (
+                      <div className={`absolute top-full pt-3 w-64 z-[9999] ${isRightAligned ? "right-0" : "left-0"}`}>
+                        <div className="bg-white rounded-[20px] shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden p-2">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.name}
+                              href={child.href}
+                              onClick={() => setActiveDropdown(null)}
+                              className="block px-4 py-3 text-sm font-semibold text-slate-600 hover:text-[var(--color-primary)] hover:bg-red-50 rounded-xl transition-all"
+                            >
+                              {child.name}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    )}
+                  </div>
                 );
               })}
 
-              <Link
-                href="/contact"
-                className="ml-4 bg-[var(--color-primary)] text-white px-7 py-3 rounded-full text-sm font-bold tracking-wide hover:bg-red-700 transition-colors shadow-[0_8px_20px_-8px_rgba(220,38,38,0.5)] active:scale-95"
-              >
+              <Link href="/contact" className="ml-4 bg-[var(--color-primary)] text-white px-7 py-3 rounded-full text-sm font-bold tracking-wide hover:bg-red-700 transition-colors shadow-[0_8px_20px_-8px_rgba(220,38,38,0.5)] active:scale-95">
                 Contact
               </Link>
             </nav>
 
-            {/* Mobile menu button - Guaranteed Visibility */}
+            {/* Bouton hamburger mobile */}
             <div className="xl:hidden flex items-center">
               <button
                 onClick={toggleMenu}
@@ -204,16 +170,10 @@ export default function Navbar() {
                 aria-label="Toggle menu"
               >
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={isMenuOpen ? "close" : "open"}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <motion.div key={isMenuOpen ? "close" : "open"} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.2 }}>
                     {isMenuOpen ? <X size={28} /> : (
                       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 50 50" fill="currentColor">
-                        <path d="M 5 8 A 2.0002 2.0002 0 1 0 5 12 L 45 12 A 2.0002 2.0002 0 1 0 45 8 L 5 8 z M 5 23 A 2.0002 2.0002 0 1 0 5 27 L 45 27 A 2.0002 2.0002 0 1 0 45 23 L 5 23 z M 5 38 A 2.0002 2.0002 0 1 0 5 42 L 45 42 A 2.0002 2.0002 0 1 0 45 38 L 5 38 z"></path>
+                        <path d="M 5 8 A 2.0002 2.0002 0 1 0 5 12 L 45 12 A 2.0002 2.0002 0 1 0 45 8 L 5 8 z M 5 23 A 2.0002 2.0002 0 1 0 5 27 L 45 27 A 2.0002 2.0002 0 1 0 45 23 L 5 23 z M 5 38 A 2.0002 2.0002 0 1 0 5 42 L 45 42 A 2.0002 2.0002 0 1 0 45 38 L 5 38 z" />
                       </svg>
                     )}
                   </motion.div>
