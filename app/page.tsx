@@ -115,8 +115,8 @@ export default async function Home() {
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[1.1] font-heading drop-shadow-2xl">
               <span className="block italic opacity-90">{heroTitleLines[0] || "ENSEMBLE,"}</span>
-              <span className="block sm:whitespace-nowrap">{heroTitleLines[1] || "CONSTRUISONS"}</span>
-              <span className="text-[var(--color-primary)] drop-shadow-[0_0_15px_rgba(255,0,0,0.3)] sm:whitespace-nowrap">{heroTitleLines[2] || "L'AVENIR"}</span>
+              <span className="block">{heroTitleLines[1] || "CONSTRUISONS"}</span>
+              <span className="block text-[var(--color-primary)] drop-shadow-[0_0_15px_rgba(255,0,0,0.3)]">{heroTitleLines[2] || "L'AVENIR"}</span>
             </h1>
 
             <motion.p
