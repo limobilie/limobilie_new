@@ -125,13 +125,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="fr" className={`${inter.variable} ${outfit.variable} overflow-x-hidden w-full max-w-[100vw]`}>
+    <html lang="fr" className={`${inter.variable} ${outfit.variable}`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="font-sans bg-[var(--color-bg)] text-[var(--color-text)] antialiased overflow-x-hidden w-full relative max-w-[100vw]">
+      <body className="font-sans bg-[var(--color-bg)] text-[var(--color-text)] antialiased w-full">
         <AdminHider><Navbar /></AdminHider>
-        <main className="min-h-screen pt-28 md:pt-40 w-full overflow-x-clip relative">
+        <main className="min-h-screen pt-28 md:pt-40 w-full relative">
           {children}
         </main>
         <AdminHider><Footer /></AdminHider>
