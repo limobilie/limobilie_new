@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Premium vibrant red gradient matching the White & Red Elegance theme -->
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3b30" />
+      <stop offset="100%" stop-color="#cc0000" />
+    </linearGradient>
+    <!-- Soft shadow for premium depth -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#cc0000" flood-opacity="0.15" />
+    </filter>
+  </defs>
+  
+  <!-- Premium rounded backdrop -->
+  <rect width="512" height="512" rx="128" fill="#ffffff" />
+  
+  <!-- Subtle inner border for premium elegance -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="none" stroke="url(#redGrad)" stroke-width="8" opacity="0.1" />
+
+  <!-- Modern House Icon with premium curves and a sleek window -->
+  <g filter="url(#dropShadow)">
+    <!-- Roof and main body -->
+    <path d="M256 90L70 245v180c0 15 12 27 27 27h110V320c0-10 8-18 18-18h62c10 0 18 8 18 18v132h110c15 0 27-12 27-27V245L256 90z" fill="url(#redGrad)" />
+    
+    <!-- Modern Chimney -->
+    <path d="M370 120h40v90l-40-32v-58z" fill="url(#redGrad)" />
+    
+    <!-- Premium white accent window -->
+    <circle cx="256" cy="210" r="32" fill="#ffffff" opacity="0.95" />
+    <path d="M256 178v64M224 210h64" stroke="url(#redGrad)" stroke-width="6" stroke-linecap="round" />
+  </g>
+</svg>

@@ -73,6 +73,17 @@ export default function Navbar() {
     };
   }, [isMenuOpen]);
 
+  // Fermer le dropdown quand on clique en dehors (essentiel pour le tactile)
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (activeDropdown && !(e.target as HTMLElement).closest(".relative.group")) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
+  }, [activeDropdown]);
+
   return (
     <>
       <header
@@ -109,6 +120,14 @@ export default function Navbar() {
                 >
                   {item.children ? (
                     <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (activeDropdown === item.name) {
+                          setActiveDropdown(null);
+                        } else {
+                          setActiveDropdown(item.name);
+                        }
+                      }}
                       className={`flex items-center space-x-1.5 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                         activeDropdown === item.name
                           ? "text-[var(--color-primary)] bg-red-50/50"

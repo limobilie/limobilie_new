@@ -108,7 +108,7 @@ export default function AcheterClient({ content, dbProperties }: { content: Reco
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[40vh] flex items-center justify-center bg-slate-950 overflow-hidden">
+      <section className="relative h-[50vh] min-h-[340px] lg:h-[40vh] lg:min-h-[400px] flex items-center justify-center bg-slate-950 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={content.acheter_hero_image || "/images/louer-vil1.png"}

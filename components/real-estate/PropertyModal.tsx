@@ -29,7 +29,7 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
         </button>
 
         {/* Gallery Section */}
-        <div className="w-full md:w-3/5 bg-slate-100 flex flex-col">
+        <div className="w-full md:w-3/5 bg-slate-100 flex flex-col h-[300px] sm:h-[400px] md:h-auto shrink-0">
           <div className="relative flex-grow">
             <Image
               src={property.gallery[activeImg]}
@@ -37,6 +37,7 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
               fill
               sizes="(max-width: 768px) 100vw, 60vw"
               className="object-contain p-4 md:p-8"
+              priority
             />
           </div>
           {property.gallery.length > 1 && (
@@ -57,7 +58,7 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
         </div>
 
         {/* Info Section */}
-        <div className="w-full md:w-2/5 p-8 md:p-12 overflow-y-auto no-scrollbar flex flex-col">
+        <div className="w-full md:w-2/5 p-8 md:p-12 overflow-y-auto no-scrollbar flex flex-col flex-1 md:flex-none">
           <div className="space-y-8">
             <div className="space-y-4">
               <span className="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em]">

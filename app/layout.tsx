@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     images: ["/images/logo-official.png"],
   },
   alternates: { canonical: BASE_URL },
-  icons: { icon: "/favicon.ico", apple: "/images/logo-official.png" },
+  icons: { icon: "/favicon.svg", apple: "/favicon.svg" },
   category: "real estate",
 };
 

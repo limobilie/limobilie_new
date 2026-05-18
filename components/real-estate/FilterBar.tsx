@@ -94,7 +94,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
           </div>
         ) : (
           /* MODE NORMAL */
-          <div className="flex flex-col lg:flex-row items-end gap-4 flex-wrap">
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-4 flex-wrap">
             {/* Type d'offre */}
             <div className="w-full lg:w-36 space-y-2">
               <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Type</label>
@@ -103,7 +103,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
                   name="offerType"
                   value={filters.offerType}
                   onChange={handleChange}
-                  className="w-full bg-slate-50 border-none rounded-2xl px-4 py-4 text-sm font-bold appearance-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all cursor-pointer"
+                  className="w-full bg-slate-50 border-none rounded-2xl px-4 pr-10 py-4 text-sm font-bold appearance-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all cursor-pointer"
                 >
                   <option value="vente">Vente</option>
                   <option value="location">Location</option>
@@ -122,7 +122,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
                   name="type"
                   value={filters.type}
                   onChange={handleChange}
-                  className="w-full bg-slate-50 border-none rounded-2xl px-4 py-4 text-sm font-bold appearance-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all cursor-pointer"
+                  className="w-full bg-slate-50 border-none rounded-2xl px-4 pr-10 py-4 text-sm font-bold appearance-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all cursor-pointer"
                 >
                   <option value="">Tous</option>
                   <option value="terrain">Terrain</option>
@@ -135,25 +135,23 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
             </div>
 
             {/* Localisation */}
-            <div className="flex-grow space-y-2">
+            <div className="w-full lg:flex-grow space-y-2">
               <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Localisation</label>
               <div className="relative">
-                <input
-                  type="text"
+                <select
                   name="city"
-                  list="ci-locations"
-                  placeholder="Entrez ou sélectionnez une ville"
                   value={filters.city}
                   onChange={handleChange}
-                  autoComplete="off"
-                  className="w-full bg-slate-50 border-none rounded-2xl px-4 py-4 text-sm font-bold focus:ring-2 focus:ring-[var(--color-primary)] transition-all"
-                />
-                <datalist id="ci-locations">
+                  className="w-full bg-slate-50 border-none rounded-2xl px-4 pr-10 py-4 text-sm font-bold appearance-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all cursor-pointer"
+                >
                   <option value="">Toutes les villes</option>
                   {IVORY_COAST_LOCATIONS.map((loc, i) => (
-                    <option key={i} value={loc} />
+                    <option key={i} value={loc}>
+                      {loc}
+                    </option>
                   ))}
-                </datalist>
+                </select>
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs">▾</span>
               </div>
             </div>
 
@@ -187,7 +185,7 @@ export default function FilterBar({ onFilterChange }: FilterBarProps) {
             <button
               type="button"
               onClick={() => setIsExpanded(!isExpanded)}
-              className={`flex items-center gap-2 px-6 py-4 rounded-2xl text-sm font-black transition-all shrink-0 ${
+              className={`flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-sm font-black transition-all shrink-0 w-full lg:w-auto ${
                 isExpanded ? "bg-slate-900 text-white" : "bg-slate-50 text-slate-600 hover:bg-slate-100"
               }`}
             >
